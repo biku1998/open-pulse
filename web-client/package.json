@@ -1,7 +1,10 @@
 {
-  "name": "frontend",
+  "name": "web-client",
+  "version": "0.0.1",
+  "description": "web-client for open-pulse",
+  "author": "https://github.com/biku1998",
   "private": true,
-  "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",

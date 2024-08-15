@@ -1,10 +1,10 @@
 {
-  "name": "backend",
+  "name": "api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "backend api for open-pulse",
+  "author": "https://github.com/biku1998",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
