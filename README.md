@@ -1,3 +1,3 @@
 # Open pulse
 
-Open source event monitoring platform
+Open pulse is a standalone, self-hosted, open source event monitoring platform

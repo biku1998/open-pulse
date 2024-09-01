@@ -130,3 +130,5 @@ dist
 # custom
 dev-notes.md
 .DS_Store
+pgdata
+pgdata-test

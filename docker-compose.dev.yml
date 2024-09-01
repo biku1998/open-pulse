@@ -1,0 +1,21 @@
+services:
+  database:
+    env_file:
+      - .env
+
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    # command: bash -c "npm run prisma:migrate-dev-init && npm run start:dev"
+    volumes:
+      - ./api:/app
+
+  web-client:
+    build:
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    volumes:
+      - ./web-client:/app
