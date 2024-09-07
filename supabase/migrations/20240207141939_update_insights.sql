@@ -1,1 +1,0 @@
-drop trigger if exists handle_updated_at on public.insights;
