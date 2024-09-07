@@ -26,8 +26,8 @@ services:
       - JWT_EXPIRY=${JWT_EXPIRY:-168h}
     ports:
       - ${API_PORT:-8000}:${API_PORT:-8000}
-    # depends_on:
-    #   - database
+    depends_on:
+      - database
 
   web-client:
     container_name: openpulse-web-client
@@ -40,4 +40,4 @@ services:
       - PORT=${WEB_CLIENT_PORT}
       - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     ports:
-      - ${WEB_CLIENT_PORT:-3000}:${WEB_CLIENT_PORT:-3000}
+      - ${WEB_CLIENT_PORT:-5173}:${WEB_CLIENT_PORT:-5173}
