@@ -1,4 +1,6 @@
 Dockerfile
+Dockerfile.dev
+.env.example
 node_modules
 npm-debug.log
 dist

@@ -7,19 +7,20 @@ services:
     build:
       dockerfile: Dockerfile.dev
     env_file:
-      - .env
+      - ./api/.env
     volumes:
       - ./api:/app
       - /app/node_modules
     ports:
       # For prisma studio
       - 5555:5555
+    # command: bash -c "npx prisma migrate dev && npm run start:dev"
 
   web-client:
     build:
       dockerfile: Dockerfile.dev
     env_file:
-      - .env
+      - ./web-client/.env
     volumes:
       - ./web-client:/app
       - /app/node_modules
