@@ -132,3 +132,4 @@ dev-notes.md
 .DS_Store
 pgdata
 pgdata-test
+docs
