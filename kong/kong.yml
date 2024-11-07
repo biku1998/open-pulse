@@ -1,0 +1,42 @@
+_format_version: '3.0'
+_transform: true
+
+services:
+  - name: auth-service
+    url: http://auth:3000
+
+    routes:
+      - name: health-check
+        paths:
+          - /auth/health
+        methods:
+          - GET
+        strip_path: false
+
+      - name: register
+        paths:
+          - /auth/register
+        methods:
+          - POST
+        strip_path: false
+
+      - name: login
+        paths:
+          - /auth/login
+        methods:
+          - POST
+        strip_path: false
+
+      - name: logout
+        paths:
+          - /auth/logout
+        methods:
+          - POST
+        strip_path: false
+
+      - name: refresh
+        paths:
+          - /auth/refresh
+        methods:
+          - POST
+        strip_path: false

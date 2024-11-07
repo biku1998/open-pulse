@@ -1,7 +1,0 @@
-node_modules/
-dist/
-.swc/
-.prettierrc.js
-.eslintrc.js
-env.d.ts
-vite.config.ts

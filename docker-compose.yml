@@ -1,7 +1,7 @@
 services:
   database:
-    container_name: openpulse-postgres
     image: postgres:16
+    container_name: openpulse-postgres
     restart: '${DOCKER_RESTART_POLICY:-unless-stopped}'
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
@@ -12,32 +12,37 @@ services:
     volumes:
       - ./pgdata:/var/lib/postgresql/data
 
-  api:
-    container_name: openpulse-api
-    image: biku1998/openpulse-api
+  auth:
+    image: openpulse/auth-serice
+    container_name: openpulse-auth-service
     restart: '${DOCKER_RESTART_POLICY:-unless-stopped}'
     build:
       dockerfile: Dockerfile
-      context: ./api
+      context: ./auth
     environment:
-      - PORT=${API_PORT}
       - DATABASE_URL=${DATABASE_URL}
       - JWT_SECRET=${JWT_SECRET}
       - JWT_EXPIRY=${JWT_EXPIRY:-168h}
-    ports:
-      - ${API_PORT:-8000}:${API_PORT:-8000}
     depends_on:
       - database
 
-  web-client:
-    container_name: openpulse-web-client
-    image: biku1998/openpulse-web-client
+  kong:
+    image: kong:latest
+    container_name: openpulse-kong
     restart: '${DOCKER_RESTART_POLICY:-unless-stopped}'
-    build:
-      dockerfile: Dockerfile
-      context: ./web-client
     environment:
-      - PORT=${WEB_CLIENT_PORT}
-      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+      KONG_DATABASE: 'off' # DB-less mode
+      KONG_DECLARATIVE_CONFIG: '/usr/local/kong/kong.yml' # Location of the config file
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_LISTEN: '0.0.0.0:8001'
+      KONG_PROXY_LISTEN: '0.0.0.0:8000'
+      KONG_LOG_LEVEL: debug
     ports:
-      - ${WEB_CLIENT_PORT:-5173}:${WEB_CLIENT_PORT:-5173}
+      - '8000:8000'
+    volumes:
+      - ./kong/kong.yml:/usr/local/kong/kong.yml
+    depends_on:
+      - auth

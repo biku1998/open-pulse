@@ -1,8 +1,0 @@
-node_modules/
-dist/
-.swc/
-.prettierrc
-build
-coverage
-.gitlab
-.vscode
